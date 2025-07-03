@@ -9,6 +9,8 @@ import (
 	"github.com/samber/lo"
 	"github.com/shopspring/decimal"
 
+	"runtime"
+
 	"github.com/yzimhao/trading_engine/v2/internal/di/provider"
 	"github.com/yzimhao/trading_engine/v2/internal/modules/middlewares"
 	"github.com/yzimhao/trading_engine/v2/internal/persistence"
@@ -59,10 +61,16 @@ func (exa *exampleModule) example(ctx *gin.Context) {
 		ctx.Redirect(301, "/example/"+support[0])
 		return
 	}
+	if runtime.GOOS == "windows" {
 
-	ctx.HTML(http.StatusOK, "example/index.html", gin.H{
-		"symbol": symbol,
-	})
+		ctx.HTML(http.StatusOK, "example\\index.html", gin.H{
+			"symbol": symbol,
+		})
+	} else {
+		ctx.HTML(http.StatusOK, "example/index.html", gin.H{
+			"symbol": symbol,
+		})
+	}
 }
 
 func (exa *exampleModule) deposit(ctx *gin.Context) {
