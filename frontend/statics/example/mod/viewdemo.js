@@ -88,7 +88,7 @@ layui.define(['form',"baseinfo", 'utils', 'kchart', 'websocket','login'], functi
                 var side = $(this).hasClass("sell") ? "ask" : "bid";
                 var order_type = $("select[name='order_type']").val();
                 var mtype = $("input[name='mtype']:checked").val();
-                
+                console.log("side: ", side, " order_type: ", order_type, " mtype: ", mtype);
                 $.ajax({
                     url: "/api/v1/order/create",
                     type: "post",
